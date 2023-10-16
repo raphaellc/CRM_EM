@@ -10,9 +10,14 @@ public class ContatoDao {
     //Construtor
     private daos.Conexao con;
 
-    public void ContatoDao(){
+    public ContatoDao(Conexao conexao) {
+        this.con = conexao;
+    }
+
+    public ContatoDao(){
         this.con = new daos.Conexao();
     }
+
     public void adicionarContato(ContatoDto contato) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -65,13 +70,13 @@ public class ContatoDao {
         try {
             connection = Conexao.conectar(); // Use sua classe de conexão personalizada
 
-            String sql = "SELECT id_pessoa, nome, dt_nasc, celular, email, id_setor, ocupacao, id_origem, dt_hr_origem FROM crmem.pessoas";
+            String sql = "SELECT id_pessoas, nome, dt_nasc, celular, email, id_setor, ocupacao, id_origem, dt_hr_origem, id_tipo_pessoa FROM crmem.pessoas";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 ContatoDto contato = new ContatoDto();
-                contato.setId_pessoa(resultSet.getInt("id_pessoa"));
+                contato.setId_pessoa(resultSet.getInt("id_pessoas"));
                 contato.setNome(resultSet.getString("nome"));
                 contato.setDt_nasc(resultSet.getDate("dt_nasc").toLocalDate());
                 contato.setCelular(resultSet.getString("celular"));
@@ -80,6 +85,7 @@ public class ContatoDao {
                 contato.setOcupacao(resultSet.getString("ocupacao"));
                 contato.setId_origem(resultSet.getInt("id_origem"));
                 contato.setDt_hr_origem(resultSet.getTimestamp("dt_hr_origem").toLocalDateTime());
+                contato.setId_tipo_pessoa(resultSet.getInt("id_tipo_pessoa"));
                 contatos.add(contato);
             }
         } catch (SQLException e) {
