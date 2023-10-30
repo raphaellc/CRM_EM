@@ -6,14 +6,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import controladoras.*;
+import visoes.TelaCadastroContato;
+import javax.swing.*;
 
 
-public class CRM_EM {
+public class CRM_EM extends JFrame {
+
     public static void main(String[] args) {
+        new CRM_EM();
         Scanner scanner = new Scanner(System.in);
         ContatoDao contato_dao = new ContatoDao();
         ContatoControladora contato_controladora = new ContatoControladora();
-
+        new TelaCadastroContato(contato_controladora);
         // Criando um objeto Calendar para dt_nasc
         LocalDate dtNasc= LocalDate.of(1883,01,10);
 

@@ -18,7 +18,7 @@ public class ContatoDao {
         this.con = new daos.Conexao();
     }
 
-    public void adicionarContato(ContatoDto contato) {
+    public boolean adicionarContato(ContatoDto contato) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -42,7 +42,9 @@ public class ContatoDao {
 
             // Definindo os atributos restantes da mesma maneira
 
-            preparedStatement.executeUpdate();
+           if (preparedStatement.executeUpdate() != 0){
+               return true;
+           }
 
 
         } catch (SQLException e) {
@@ -59,6 +61,7 @@ public class ContatoDao {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
     public List<ContatoDto> listarContatos() {

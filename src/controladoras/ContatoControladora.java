@@ -15,11 +15,12 @@ public class ContatoControladora {
 
     }
 
-    public void adicionarContato(ContatoDto contato) {
+    public boolean adicionarContato(ContatoDto contato) {
         contatos.add(contato);
         if (contato != null) {
-            this.contato.adicionarContato(contato);
+            return this.contato.adicionarContato(contato);
         }
+        return false;
     }
 
     public List<ContatoDto> listarContatos() {

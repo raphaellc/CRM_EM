@@ -18,9 +18,9 @@ public class Contato {
         contato_dao = new ContatoDao(conexao);
     }
 
-    public void adicionarContato(ContatoDto contato) {
+    public boolean adicionarContato(ContatoDto contato) {
         contatos.add(contato);
-        contato_dao.adicionarContato(contato);
+        return contato_dao.adicionarContato(contato);
     }
 
     public List<ContatoDto> listarContatos() {
