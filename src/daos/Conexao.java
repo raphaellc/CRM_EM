@@ -4,9 +4,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    private static final String URL = "jdbc:mysql://localhost:3306/?user=root";
-    private static final String USUARIO = "root";
-    private static final String SENHA = "Un1$1n0$";
+    private static final String URL = System.getenv("URL");
+    private static final String USUARIO = System.getenv("USUARIO");
+    private static final String SENHA = System.getenv("SENHA");
 
     public static Connection conectar() {
         Connection connection = null;

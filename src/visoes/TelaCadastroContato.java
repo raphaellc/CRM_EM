@@ -19,19 +19,35 @@ public class TelaCadastroContato extends JFrame{
     private JFormattedTextField form_text_dt_nasc;
     private JLabel dt_nasc;
     private JLabel celular;
-    private JTextArea textCelular;
+    private JTextField textCelular;
+    private JComboBox combobox_setor;
+    private JLabel setor;
+    private JTextField textOcupacao;
+    private JLabel ocupacao;
+    private JComboBox combobox_origem;
+    private JLabel origem;
+    ;
 
     public TelaCadastroContato(ContatoControladora cto_control){
         setContentPane(jp_tela_cadastro_contato);
         setTitle("Tela");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(300,200);
+        setSize(800,600);
         setLocationRelativeTo(null);
         setVisible(true);
+        combobox_setor.addItem("setorA");
+        combobox_setor.addItem("setorB");
+        combobox_origem.addItem("Site");
+        combobox_origem.addItem("Redes Sociais");
+        combobox_origem.addItem("pesquisando na internet");
+        combobox_origem.addItem("Cartaz ou Adesivos");
+        combobox_origem.addItem("Youtube");
+        combobox_origem.addItem("Recebi de Whatsapp");
+        combobox_origem.addItem("Indicação de Amigo");
+
         btn_cadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nome = textNome.getText();
                 ContatoDto contato = new ContatoDto();
                 contato.setNome(textNome.getText());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -43,6 +59,7 @@ public class TelaCadastroContato extends JFrame{
                 contato.setId_origem(3);
                 contato.setDt_hr_origem(LocalDateTime.now()); // Data e hora atuais
                 contato.setId_tipo_pessoa(1); // 1-Militante; 2-Contato;
+                JOptionPane.showMessageDialog(TelaCadastroContato.this,"combo_box" + combobox_setor.getSelectedIndex());
                 if(cto_control.adicionarContato(contato))
                     JOptionPane.showMessageDialog(TelaCadastroContato.this,"Cadastrado com sucesso");
                 else
