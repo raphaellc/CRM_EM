@@ -1,6 +1,8 @@
 package visoes;
 import controladoras.ContatoControladora;
 import dtos.ContatoDto;
+import dtos.SetorPessoaDto;
+import modelos.SetorPessoa;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +10,11 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaCadastroContato extends JFrame{
+
     private JTextField textNome;
     private JLabel nome;
     private JLabel email;
@@ -26,17 +31,23 @@ public class TelaCadastroContato extends JFrame{
     private JLabel ocupacao;
     private JComboBox combobox_origem;
     private JLabel origem;
-    ;
 
+    private List<SetorPessoaDto> setores_pessoa;
+    private SetorPessoa setor_pessoa;
     public TelaCadastroContato(ContatoControladora cto_control){
+
+        setor_pessoa = new SetorPessoa();
         setContentPane(jp_tela_cadastro_contato);
         setTitle("Tela");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800,600);
         setLocationRelativeTo(null);
         setVisible(true);
-        combobox_setor.addItem("setorA");
-        combobox_setor.addItem("setorB");
+        setores_pessoa = setor_pessoa.listarSetoresPessoa();
+        for (SetorPessoaDto sp : setores_pessoa){
+            combobox_setor.addItem(sp.getDescricao());
+        }
+
         combobox_origem.addItem("Site");
         combobox_origem.addItem("Redes Sociais");
         combobox_origem.addItem("pesquisando na internet");
